@@ -1,0 +1,23 @@
+Simulate Caxton Foster's "blue" CPU
+
+The rust version is a fairly simple port of the simulator (in C) described at
+https://brainwagon.org/2011/07/07/a-basic-simulator-for-caxton-fosters-blue-architecture/
+
+I'm not sure how I bumped into that site - it was either while looking up
+Caxton Foster's book or while searching for an "easy cpu" to emulate, and
+the search engine pointed me to @brainwagon (Mark VandeWettering's) "simple
+behavioral simulator" of Caxton Foster's "Blue" CPU.
+
+Since I wanted to check out Rust's safety guarantees to avoid having weird
+behavior while testing hand rolled machine code which I plan to use as part of
+romforth (https://github.com/romforth/romforth), I decided to go ahead with a
+re-implementation of that code in Rust.
+
+This is a fairly straight-forward, one-to-one translation except for some
+refactoring of the Blue machine code which is embedded in the source code (and
+is used as a "hello world" test) to deal with Rust panicing on an overflow in
+the original machine code during 16-bit addition. So Rust does seem safer,
+after all! I guess it is only fair to conclude: Rust: 1; C: 0
+
+Although this is a rust project, a makefile exists - mostly since make is baked
+into my muscle memory. The makefile is just a thin shim layer over cargo build.
